@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import Button from "@/components/common/Button";
 
+const WHATSAPP_OWNER_NUMBER = "94768251792";
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -16,36 +18,48 @@ export default function ContactPage() {
     message: "",
   });
   const [errors, setErrors] = useState({});
-  const [success, setSuccess] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    else if (!/\S+@\S+\.\S+/.test(formData.email))
+    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(formData.email.trim()))
       newErrors.email = "Email is invalid";
-    if (!formData.message) newErrors.message = "Message is required";
+    if (!formData.message.trim()) newErrors.message = "Message is required";
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = validateForm();
-    if (Object.keys(newErrors).length === 0) {
-      // Handle form submission here
-      console.log("Form submitted:", formData);
-      setSuccess(true);
-      setFormData({ name: "", email: "", phone: "", message: "" });
-      setTimeout(() => setSuccess(false), 5000);
-    } else {
-      setErrors(newErrors);
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      return;
     }
+
+    const message = [
+      "Hello Sea Dream Beach Resort, I have a question.",
+      "",
+      `Name: ${formData.name.trim()}`,
+      `Email: ${formData.email.trim()}`,
+      `Phone: ${formData.phone.trim() || "Not provided"}`,
+      "",
+      "Message:",
+      formData.message.trim(),
+    ].join("\n");
+    const whatsappUrl = `https://wa.me/${WHATSAPP_OWNER_NUMBER}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((previous) => ({
+      ...previous,
+      [e.target.name]: e.target.value,
+    }));
     if (errors[e.target.name]) {
-      setErrors({ ...errors, [e.target.name]: "" });
+      setErrors((previous) => ({ ...previous, [e.target.name]: "" }));
     }
   };
 
@@ -55,7 +69,7 @@ export default function ContactPage() {
       <div className="bg-primary text-white py-16">
         <div className="container-custom text-center">
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
-          <p className="text-lg">We'd love to hear from you</p>
+          <p className="text-lg">We&apos;d love to hear from you</p>
         </div>
       </div>
 
@@ -66,11 +80,10 @@ export default function ContactPage() {
             <h2 className="text-2xl font-bold text-primary mb-6">
               Send us a message
             </h2>
-            {success && (
-              <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-                Message sent successfully! We'll get back to you soon.
-              </div>
-            )}
+            <p className="mb-4 text-sm text-gray-600">
+              This opens a WhatsApp message to the resort. Please tap Send in
+              WhatsApp to deliver it.
+            </p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-gray-700 mb-2">Name *</label>
@@ -126,7 +139,7 @@ export default function ContactPage() {
                 className="w-full flex items-center justify-center gap-2"
               >
                 <Send size={18} />
-                Send Message
+                Continue to WhatsApp
               </Button>
             </form>
           </div>

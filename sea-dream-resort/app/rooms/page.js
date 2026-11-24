@@ -1,15 +1,15 @@
-import RoomCards from "@/components/home/RoomCards";
+import RoomListing from "@/components/rooms/RoomListing";
+
+export const metadata = {
+  title: "Rooms & Accommodation | Sea Dream Beach Resort, Weligama",
+  description:
+    "Explore all room types at Sea Dream Beach Resort in Weligama, Sri Lanka. From budget rooms to luxury ocean-view suites with private bathrooms. Book direct for the best rates.",
+};
 
 export default function RoomsPage() {
   return (
-    <div className="pt-16">
-      <div className="bg-primary text-white py-16">
-        <div className="container-custom text-center">
-          <h1 className="text-4xl font-bold mb-4">Our Rooms</h1>
-          <p className="text-lg">Choose the perfect room for your stay</p>
-        </div>
-      </div>
-      <RoomCards />
+    <div className="pt-20">
+      <RoomListing />
     </div>
   );
 }

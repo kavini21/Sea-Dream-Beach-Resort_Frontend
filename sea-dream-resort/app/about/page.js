@@ -1,3 +1,5 @@
+'use client';
+
 import { Users, Heart, Award, Clock } from "lucide-react";
 
 const values = [
@@ -27,10 +29,10 @@ export default function AboutPage() {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <div className="bg-primary text-white py-16">
-        <div className="container-custom text-center">
-          <h1 className="text-4xl font-bold mb-4">About Sea Dream Beach</h1>
-          <p className="text-lg max-w-2xl mx-auto">
+      <div className="w-full h-[500px]  text-white bg-[url('/images/aboutpage.jpg')]">
+        <div className="flex flex-col items-center justify-center h-full text-center container-custom">
+          <h1 className="mb-4 text-4xl font-bold">About Sea Dream Beach</h1>
+          <p className="max-w-2xl mx-auto text-lg">
             Discover the story behind your perfect beach getaway
           </p>
         </div>
@@ -39,29 +41,29 @@ export default function AboutPage() {
       {/* Main Content */}
       <div className="py-16">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
+          <div className="grid grid-cols-1 gap-12 mb-16 md:grid-cols-2">
             <div>
               <img
                 src="/images/hotel-view.jpg"
                 alt="Hotel View"
-                className="rounded-lg shadow-lg w-full h-96 object-cover"
+                className="object-cover w-full rounded-lg shadow-lg h-96"
               />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-primary mb-4">
+              <h2 className="mb-4 text-3xl font-bold text-primary">
                 Our Story
               </h2>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="mb-4 leading-relaxed text-gray-600">
                 Sea Dream Beach Resort has been a family-run establishment for
                 over a decade, welcoming travelers from around the world to
                 experience the beauty of Weligama.
               </p>
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="mb-4 leading-relaxed text-gray-600">
                 Our journey began with a simple dream - to create a peaceful
                 haven where guests could escape the hustle of daily life and
                 reconnect with nature and themselves.
               </p>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="leading-relaxed text-gray-600">
                 Today, we're proud to offer 7+ beautifully appointed rooms, each
                 designed with your comfort in mind. Our 4.5-star guest rating
                 reflects our commitment to excellence and genuine hospitality.
@@ -70,21 +72,21 @@ export default function AboutPage() {
           </div>
 
           {/* Core Values */}
-          <h2 className="text-3xl font-bold text-center text-primary mb-12">
+          <h2 className="mb-12 text-3xl font-bold text-center text-primary">
             Our Core Values
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {values.map((value, index) => {
               const Icon = value.icon;
               return (
                 <div
                   key={index}
-                  className="text-center p-6 bg-gray-50 rounded-lg"
+                  className="p-6 text-center rounded-lg bg-gray-50"
                 >
-                  <div className="bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-primary/10">
                     <Icon className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                  <h3 className="mb-2 text-xl font-semibold">{value.title}</h3>
                   <p className="text-gray-600">{value.description}</p>
                 </div>
               );
